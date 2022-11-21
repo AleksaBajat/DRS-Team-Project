@@ -1,0 +1,12 @@
+py -m venv env #Za kreiranje virtuelnog okruzenja
+./env/Scripts/activate #Za aktiviranje virtuelnog okruzenja
+py -m pip install [package_name] #Instaliranje paketa u virtuelnom okruzenju
+# env folderi su excluded u gitignoru!
+
+#Imena klasa CamelCase
+#Imena prakticno svega ostalog snake_case
+
+#Flask dokumentacija: https://flask.palletsprojects.com/en/2.2.x/quickstart/
+
+#Runnovanje kontejnera docker-compose up ako nema promena i docker-compose up --build ako postoje promene
+#Gasenje kontejnera docker-compose down ili ctrl c u terminalu

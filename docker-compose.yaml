@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  ui:
+    build:
+      context: ./UI
+      dockerfile: DockerFile
+    ports:
+      - "8081:8081"
+  engine:
+    build: 
+      context: ./Engine
+      dockerfile: DockerFile
+    ports:
+      - "8082:8081"
