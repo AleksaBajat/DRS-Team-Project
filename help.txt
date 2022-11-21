@@ -1,6 +1,7 @@
 py -m venv env #Za kreiranje virtuelnog okruzenja
 ./env/Scripts/activate #Za aktiviranje virtuelnog okruzenja
 py -m pip install [package_name] #Instaliranje paketa u virtuelnom okruzenju
+python -m pip install -r requirements.txt #Instaliranje svih paketa iz requirements fajla
 # env folderi su excluded u gitignoru!
 
 #Imena klasa CamelCase
