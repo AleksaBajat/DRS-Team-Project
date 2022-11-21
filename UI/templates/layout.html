@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% endblock %} 
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% endblock %}
+    
+    {% block head %}{% endblock %} 
+</head>
+<body>
+    <nav class="navigation-container">
+        <div class="navigation-item"><a href="#">Filler #1</a></div>
+        <div class="navigation-item"><a href="#">Filler #2</a></div>
+        <div class="navigation-item"><a href="#">Filler #3</a></div>
+        <div class="navigation-item"><a href="#">Filler #4</a></div>        
+    </nav>
+    {% block body %}{% endblock %} 
+</body>
+</html>

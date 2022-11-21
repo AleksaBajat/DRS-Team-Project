@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block scripts %} 
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+    <title>Crypto Chiefs - Login</title>
+{% endblock %} 
+
+{% block body %}
+<div class="login-container">
+    <h1>Welcome to Crypto Chiefs!</h1>
+    <p>State of the art crypto broker ready to serve you!</p>
+    <form class="login-form-container">
+        <div class="login-form-item">
+            <label class="login-form-item-label">Email:</label>
+            <input class="login-form-item-input" type="email" name="email">
+        </div>
+        
+        <div class="login-form-item">
+            <label class="login-form-item-label">Password:</label>
+            <input class="login-form-item-input" type="password" name="password">
+        </div>        
+    </form>
+</div>
+{% endblock %}

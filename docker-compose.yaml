@@ -6,6 +6,9 @@ services:
       dockerfile: DockerFile
     ports:
       - "8081:8081"
+    volumes:
+      - /UI/templates:/templates
+      - /UI/static:/static
   engine:
     build: 
       context: ./Engine

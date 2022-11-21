@@ -1,0 +1,28 @@
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+}
+
+.login-form-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.login-form-item{
+    display: flex;
+    flex-direction: row;    
+}
+
+.login-form-item-label{
+    flex:1;
+    padding: 0.5em;
+}
+
+.login-form-item-input{    
+    border: 1px solid gainsboro;
+    box-shadow: 5px;
+}

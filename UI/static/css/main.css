@@ -1,0 +1,19 @@
+*{
+    text-decoration: none;
+    padding: none;
+    margin: none;
+    font-family: Helvetica;
+}
+
+.navigation-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navigation-item{
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+}
