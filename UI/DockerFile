@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY ui.py /app
 
-COPY static /app/static
+# COPY static /app/static
 
-COPY templates /app/templates
+# COPY templates /app/templates
 
 COPY requirements.txt /app
 
