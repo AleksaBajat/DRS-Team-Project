@@ -4,12 +4,12 @@ WORKDIR /app
 
 COPY ui.py /app
 
-# COPY static /app/static
+COPY static /app/static
 
-# COPY templates /app/templates
+COPY templates /app/templates
 
 COPY requirements.txt /app
 
 RUN pip install -r requirements.txt
 
-CMD ["flask","--app","ui","run","--host=0.0.0.0","--port","8081"]
+CMD ["flask","--app","ui","--debug","run","--host=0.0.0.0","--port","8081"]

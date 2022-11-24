@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block scripts %} 
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+    <title>Crypto Chiefs - Register</title>
+{% endblock %} 
+
+{% block body %}
+<div class="register-container">
+    <h1>Welcome to Crypto Chiefs!</h1>
+    <p>Registering here is the first step to success!</p>
+    <form onsubmit="return register()" id="register-form" class="register-form-container">
+        <div class="register-form-item">
+            <label class="register-form-item-label">Name:</label>
+            <input class="register-form-item-input" type="text" id="name" name="name">
+        </div>
+
+        <div class="register-form-item">
+            <label class="register-form-item-label">Last Name:</label>
+            <input class="register-form-item-input" type="text" id="last-name" name="lastName">
+        </div>
+
+        <div class="register-form-item">
+            <label class="register-form-item-label">Address:</label>
+            <input class="register-form-item-input" type="text" id="address" name="address">
+        </div>
+
+        <div class="register-form-item">
+            <label class="register-form-item-label">City:</label>
+            <input class="register-form-item-input" type="text" id="city" name="city">
+        </div>
+
+        <div class="register-form-item">
+            <label class="register-form-item-label">Country:</label>
+            <input class="register-form-item-input" type="text" id="country" name="country">
+        </div>
+
+        <div class="register-form-item">
+            <label class="register-form-item-label">Phone Number:</label>
+            <input class="register-form-item-input" type="text" id="phone-number" name="phoneNumber">
+        </div>
+
+        <div class="register-form-item">
+            <label class="register-form-item-label">Email:</label>
+            <input class="register-form-item-input" type="email" id="email" name="email">
+        </div>
+        
+        <div class="register-form-item">
+            <label class="register-form-item-label">Password:</label>
+            <input class="register-form-item-input" type="password" id="password" name="password">
+        </div>     
+        
+        <div class="register-form-item">            
+            <button class="register-form-button" type="submit">Register</button>
+        </div>
+
+        <span>Don't have an account?&nbsp;<a href="/register">Join here</a></span>
+    </form>
+</div>
+{% endblock %}
