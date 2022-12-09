@@ -2,6 +2,7 @@
 
 {% block styles %}
     {{ super() }}
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 {% endblock %}
 
@@ -15,55 +16,45 @@
 {% endblock %} 
 
 {% block body %}
-<div class="register-container">
-    <h1>Welcome to Crypto Chiefs!</h1>
-    <p>Registering here is the first step to success!</p>
-    <form onsubmit="return register()" id="register-form" class="register-form-container">
-        <div class="register-form-item">
-            <label class="register-form-item-label">Name:</label>
-            <input class="register-form-item-input" type="text" id="name" name="name">
-        </div>
-
-        <div class="register-form-item">
-            <label class="register-form-item-label">Last Name:</label>
-            <input class="register-form-item-input" type="text" id="last-name" name="lastName">
-        </div>
-
-        <div class="register-form-item">
-            <label class="register-form-item-label">Address:</label>
-            <input class="register-form-item-input" type="text" id="address" name="address">
-        </div>
-
-        <div class="register-form-item">
-            <label class="register-form-item-label">City:</label>
-            <input class="register-form-item-input" type="text" id="city" name="city">
-        </div>
-
-        <div class="register-form-item">
-            <label class="register-form-item-label">Country:</label>
-            <input class="register-form-item-input" type="text" id="country" name="country">
-        </div>
-
-        <div class="register-form-item">
-            <label class="register-form-item-label">Phone Number:</label>
-            <input class="register-form-item-input" type="text" id="phone-number" name="phoneNumber">
-        </div>
-
-        <div class="register-form-item">
-            <label class="register-form-item-label">Email:</label>
-            <input class="register-form-item-input" type="email" id="email" name="email">
-        </div>
-        
-        <div class="register-form-item">
-            <label class="register-form-item-label">Password:</label>
-            <input class="register-form-item-input" type="password" id="password" name="password">
-        </div>     
-        
-        <div class="register-form-item">            
-            <button class="register-form-button" type="submit">Register</button>
-        </div>
-
-        <span>Don't have an account?&nbsp;<a href="/register">Join here</a></span>
-    </form>
+<div class="foundation">
+    <div class="register-container">
+        <h1>Crypto Chiefs - Register!</h1>
+        <h3>Registering here is the first step to success!</h3>
+        <div class="box">
+            <form onsubmit="return register()" id="register-form" class="register-form-container row">
+                <div class="register-form-item col-12">
+                    <input class="register-form-item-input" placeholder="Email" type="email" id="email" name="email">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="First Name" type="text" id="name" name="name">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Last Name"  type="text" id="last-name" name="lastName">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Address"  type="text" id="address" name="address">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="City" type="text" id="city" name="city">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Country" type="text" id="country" name="country">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Phone number" type="text" id="phone-number" name="phoneNumber">
+                </div>                
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Password" type="password" id="password" name="password">
+                </div>   
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Confirm Password" type="password" id="repeat_password" name="repeat_password">
+                </div>     
+                <div class="start_bt">            
+                    <button class="read_bt" type="submit">Register</button>
+                </div>
+                <div class="register-form-item col-12"> Don't have an account?&nbsp;<a href="/register">Join here</a></div>
+            </form>
+        <div>
+    </div>
 </div>
 {% endblock %}

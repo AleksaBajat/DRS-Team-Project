@@ -19,7 +19,7 @@ src: url("../fonts/BalooChettan-Regular.ttf");
 @import url(animate.min.css);
 @import url(normalize.css);
 @import url(icomoon.css);
-@import url(css/font-awesome.min.css);
+@import url(font-awesome.min.css);
 @import url(meanmenu.css);
 @import url(owl.carousel.min.css);
 @import url(swiper.min.css);
@@ -202,6 +202,7 @@ blockquote {
      padding: 30px;
 }
 
+
 button {
      border: 0;
      margin: 0;
@@ -215,7 +216,7 @@ button {
 }
 
 .layout_padding {
-     padding-top: 90px;
+     padding-top: 30px;
      padding-bottom: 0px;
 }
 
@@ -226,11 +227,16 @@ button {
 .header_section {
     width: 100%;
     float: left;
-    background-image: url(../images/background.jpg);
+    
     height: auto;
     background-size: 100%;
     padding-top: 10px;
     padding-bottom :20%;
+    background: url(../images/background.jpg) no-repeat center center fixed ;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+  background-size: cover;
 }
 .bg-light {
     background-color: transparent !important;
@@ -281,6 +287,9 @@ button {
     padding: 0px;
     list-style: none;
     display: inline-flex;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
 }
 .menu_main li {
     float: left;
@@ -290,13 +299,13 @@ button {
     text-transform: uppercase;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: #050101;
+    color: white;
 }
 .menu_main li a{
-    color: #050101;
+    color: white;
 }
 .menu_main li a:hover{
-    color: #050101;
+    color: white;
 }
 
 
@@ -324,15 +333,25 @@ button {
     width: 100%;
     float: left;
 }
+.foundation{
+   display:flex;
+   flex-direction: column;
+   align-items: center;
 
+}
 .your_text {
-    width: 100%;
-    float: left;
+    width: 50%;
+    text-align: center;
+    text-align-last: center;
+    align-self: center;
     font-size: 60px;
     color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
 }
 
 .there_text {
@@ -353,22 +372,26 @@ button {
     width: 17%;
     margin: 0 auto;
     text-align: center;
+    
 }
 
 .read_bt {
     width: 100%;
     float: left;
     margin: 40px 0px;
+    
 }
 .read_bt a {
     width: 100%;
     float: left;
     font-size: 16px;
     color: #ffffff;
-    background-color: #0F0326;;
+    background-color: #0F0326;
     text-align: center;
     padding: 10px 0px;
     border-radius: 30px;
+    box-shadow: 0 0 1pt 1pt white;
+  
 }
 .read_bt a:hover{
     background-color: purple;
@@ -595,6 +618,7 @@ button {
 .container_main1 {
     /* position: relative; */
     width: 100%;
+   
 }
 
 .image {

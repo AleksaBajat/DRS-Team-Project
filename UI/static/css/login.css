@@ -1,28 +1,38 @@
-.login-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3em;
+.login-container{ 
+    margin:20px;
+    width: 50%;
+    float: left;
+    color: #ffffff;
+   
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
+    padding: 10px;
 }
 
-.login-form-container{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+h1{
+    color: white;
+    font-size: 30px;
+    font-weight:bold;
+}
+h3{color: white;}
+a{
+    color: #c41463;
+}
+a:hover{
+    color: #162a87;
+}
+.box{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .login-form-item{
-    display: flex;
-    flex-direction: row;    
-}
-
-.login-form-item-label{
-    flex:1;
-    padding: 0.5em;
-}
-
-.login-form-item-input{    
-    border: 1px solid gainsboro;
-    box-shadow: 5px;
+    padding: 3px;
+    align-items: left;
+    text-align: left;
+    margin-bottom: 5px;
 }
