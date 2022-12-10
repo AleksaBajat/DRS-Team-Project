@@ -2,13 +2,10 @@
 
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- owl stylesheets --> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-    <!-- Responsive-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.min.css') }}">
 
@@ -16,11 +13,7 @@
 
 {% block scripts %} 
     {{ super() }}
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/plugin.js') }}"></script>
+    
     <!-- sidebar -->
     <script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
