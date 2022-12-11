@@ -10,7 +10,7 @@ function register(){
             processData: false,
             contentType: false,
             success: function (response) {
-                console.info("User registered!");
+                console.info(response);
             }
         });
     }catch(e){
