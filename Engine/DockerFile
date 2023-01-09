@@ -4,7 +4,13 @@ WORKDIR /app
 
 COPY engine.py /app
 
+COPY commands.py /app
+
+COPY database_manager.py /app
+
 COPY requirements.txt /app
+
+COPY data /app/data
 
 RUN pip install -r requirements.txt
 

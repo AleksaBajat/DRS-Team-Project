@@ -1,4 +1,5 @@
 from flask import Flask, render_template,url_for,request
+import requests
 
 app = Flask(__name__)
 
@@ -20,9 +21,11 @@ def login():
 def register():
     if request.method == 'GET':
         return render_template('register.html')
-    elif request.method == 'POST':
-        name = request.form['name']        
-        app.logger.info(f"Name : {name}")        
+    elif request.method == 'POST':        
+        url = "http://engine:8081/register"
+
+        response = requests.post(url, json=request.form)
+
         return "Registration Successful"
 
 if __name__ == '__main__':
