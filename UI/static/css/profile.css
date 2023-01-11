@@ -1,0 +1,71 @@
+.nesto{
+    padding: 1%;
+    }
+.profile-container{ 
+    
+    color: #ffffff;
+   
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.crypto-container{ 
+    
+    color: #ffffff;
+   
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+h1{
+    color: white;
+    font-size: 30px;
+    font-weight:bold;
+}
+h2,h3,h4{color: white;}
+a{
+    color: #c41463;
+}
+a:hover{
+    color: #162a87;
+}
+.box{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.login-form-item{
+    padding: 3px;
+    align-items: left;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.read_bt {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #0F0326;
+    text-align: center;
+    border-radius: 30px;
+    margin: 10px;
+    box-shadow: 0 0 1pt 1pt white;
+}
+.read_bt:hover {
+    background-color: purple;
+    color: white;
+}
+
+text{
+    color: white;
+}

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %} {% block styles %} {{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
+{% endblock %} {% block scripts %} {{ super() }}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %} {% block head %}
+<title>Crypto Chiefs - Profile</title>
+{% endblock %} {% block body %}
+<div class="row" >
+    <div class="nesto col-5 " >
+        <div class="profile-container ">
+            <h3>Welcome back chief - {{ username }}</h3>
+            <h4>Your info</h4>
+            <label for="email">Email : {{ email }}</label><br>
+            <label for="FirstName">First Name : {{ firstName }}</label> <label for="LastName">Last Name : {{ lastName
+                }}</label><br>
+            <label for="Address">Address : {{ address }}</label> <label for="City">City : {{ city }}</label><br>
+            <label for="Country">Country : {{ country }}</label> <label for="PhoneNumber">Phone number : {{ phone
+                }}</label><br>
+        </div>
+    </div>
+    <div class="nesto col-7">
+        <div class="crypto-container ">
+            <h3>Your crypto values</h3>
+            <table>
+                <thead>
+                   
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

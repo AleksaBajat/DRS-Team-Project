@@ -36,6 +36,11 @@ def login():
         else:
             return make_response('Login failed', status_code)
 
+@app.route("/profile", methods=['GET'])
+def profile():
+    if request.method == 'GET':
+        return make_response('Jovan', 200)
+
 
 @app.route("/user")
 def user():

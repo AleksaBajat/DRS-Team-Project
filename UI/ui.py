@@ -43,6 +43,12 @@ def login():
 
         return make_response('Login unsuccessful. Server error.', 500)
 
+@app.route('/profile')
+def profile():
+    url = "http://engine:8081/profile"
+    response = requests.get(url)
+    return render_template('profile.html', username=response.text)
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'GET':
