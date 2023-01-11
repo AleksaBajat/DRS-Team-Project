@@ -1,4 +1,4 @@
-from flask import Flask, render_template,url_for,request
+from flask import Flask, render_template,request
 import requests
 
 app = Flask(__name__)
@@ -17,6 +17,12 @@ def check():
 def login():
     return render_template('login.html')
 
+@app.route('/profile')
+def profile():
+    url = "http://engine:8081/profile"
+    response = requests.get(url)
+    return render_template('profile.html', username=response.text)
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'GET':
@@ -25,8 +31,7 @@ def register():
         url = "http://engine:8081/register"
 
         response = requests.post(url, json=request.form)
-
-        return "Registration Successful"
+        return response.text
 
 if __name__ == '__main__':
     app.run()

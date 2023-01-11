@@ -12,6 +12,11 @@ def register():
         CreateUserTableCommand()
         return make_response('Added to database!', 200)
 
+@app.route("/profile", methods=['GET'])
+def profile():
+    if request.method == 'GET':
+        return make_response('Jovan', 200)
+
 
 if __name__ == '__main__':
     app.run()

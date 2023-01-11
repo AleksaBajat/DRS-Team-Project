@@ -2,7 +2,7 @@ function register(){
     try{
         var form = document.getElementById('register-form');
         var formData = new FormData(form);
-    
+        
         $.ajax({
             type: "POST",        
             url: "/register",
@@ -10,7 +10,9 @@ function register(){
             processData: false,
             contentType: false,
             success: function (response) {
-                console.info("User registered!");
+                console.info(response);
+                alert("Successfully registered!")
+                window.location.href="/login"
             }
         });
     }catch(e){
