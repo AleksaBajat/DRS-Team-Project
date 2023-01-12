@@ -1,6 +1,7 @@
 from flask import Flask, render_template,url_for,request, make_response, session, redirect
 from flask_session import Session
 import requests
+import json
 
 app = Flask(__name__)
 
@@ -47,7 +48,8 @@ def login():
 def profile():
     url = "http://engine:8081/profile"
     response = requests.get(url)
-    return render_template('profile.html', username=response.text)
+    x=json.loads(response.text)
+    return render_template('profile.html',user=x)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
