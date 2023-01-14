@@ -2,6 +2,8 @@ function register(){
     try{
         var form = document.getElementById('register-form');
         var formData = new FormData(form);
+
+        formData.delete('repeatPassword')
     
         $.ajax({
             type: "POST",        
@@ -10,14 +12,11 @@ function register(){
             processData: false,
             contentType: false,
             success: function (response) {
-                console.info("User registered!");
+                console.info(response);        
             }
         });
     }catch(e){
         console.log(e)
     }
-    
-
-    return false;
 }
 

@@ -1,17 +1,30 @@
 from flask import Flask, request, make_response
-import sqlite3
-from commands import CreateUserTableCommand
+from flask_sqlalchemy import SQLAlchemy
+from models import db
+from user_operations import add_user
+import os
+
+
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///crypto_chiefs.db'
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+
+
 
 @app.route("/register", methods=['POST'])
 def register():
     if request.method == 'POST':
-        name = request.get_json()
-        print(f"Name : {name}", flush=True)
-        CreateUserTableCommand()
-        return make_response('Added to database!', 200)
+        data = request.get_json()
+        status_code = add_user(db, data)
+        return make_response('Register',status_code)
 
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == '__main__':    
+    app.run(debug=True)
+    

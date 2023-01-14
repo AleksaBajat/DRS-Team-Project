@@ -16,4 +16,4 @@ services:
     ports:
       - "8082:8081"
     volumes:
-      - ./Engine/data:/app/data
+      - ./Engine/instance:/app/instance

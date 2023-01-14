@@ -1,9 +1,10 @@
-from flask import Flask, render_template,url_for,request
+from flask import Flask, render_template,url_for,request, make_response
 import requests
 
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 
 @app.route('/')
 def index():
@@ -26,7 +27,14 @@ def register():
 
         response = requests.post(url, json=request.form)
 
-        return "Registration Successful"
+        
+        if response.status_code == 409:
+            return make_response('Unable to register. Email already exists!', 409)
+        elif 200:
+            return make_response('Successful registration!', 200)
+            
+
+        return make_response('Unable to register. Server error!', 500)
 
 if __name__ == '__main__':
     app.run()
