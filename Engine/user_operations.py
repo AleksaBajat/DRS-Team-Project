@@ -72,7 +72,7 @@ def update_user(db,user_data):
             del user_data['password']
             del user_data['repeatPassword']
 
-        exists = db.session.query(id=user_data['id']).filter_by(email=user_data['email']).first() is not None
+        exists = db.session.query(User).filter_by(id=user_data['id']).first() is not None
 
         if exists:
             User.query.filter_by(id=user_data['id']).update(user_data)    
