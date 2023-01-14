@@ -1,19 +1,20 @@
-function login(){
+function editProfile(){
     try{
-        var form = document.getElementById('login-form');
-        var formData = new FormData(form);        
+        var form = document.getElementById('edit-profile-form');
+        var formData = new FormData(form);                
     
         $.ajax({
             type: "POST",        
-            url: "/login",
+            url: "/editProfile",
             data: formData,        
             processData: false,
             contentType: false,
             success: function (response) {
-                window.location.reload()
+                console.info(response);        
             }
         });
     }catch(e){
         console.log(e)
     }
 }
+

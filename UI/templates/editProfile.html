@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block scripts %} 
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/edit-profile.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+    <title>Crypto Chiefs - Register</title>
+{% endblock %} 
+
+{% block body %}
+<div class="foundation">
+    <div class="register-container">
+        <h1>Crypto Chiefs - Edit Profile!</h1>
+        <h3>Be careful, valid data is necessary to avoid legal issues!</h3>
+        <div class="box">
+            <form id="edit-profile-form" class="register-form-container row">                
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="First Name" type="text" id="name" name="name" value="{{name}}">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Last Name"  type="text" id="last-name" name="lastName" value="{{lastName}}">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Address"  type="text" id="address" name="address"  value="{{address}}">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="City" type="text" id="city" name="city"  value="{{city}}">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Country" type="text" id="country" name="country"  value="{{country}}">
+                </div>
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Phone number" type="text" id="phone-number" name="phoneNumber"  value="{{phoneNumber}}">
+                </div>                
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Password" type="password" id="password" name="password">
+                </div>   
+                <div class="register-form-item col-6">
+                    <input class="register-form-item-input" placeholder="Confirm Password" type="password" id="repeat_password" name="repeatPassword">
+                </div>                       
+                <div class="start_bt">            
+                    <button class="read_bt" type="button" onclick="editProfile()">Save changes</button>
+                </div>            
+            </form>
+        <div>
+    </div>
+</div>
+{% endblock %}

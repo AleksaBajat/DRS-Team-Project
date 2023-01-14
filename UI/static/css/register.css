@@ -63,3 +63,7 @@ a:hover{
     background-color: purple;
     color: white;
 }
+
+.hidden-element{
+    display: none;
+}

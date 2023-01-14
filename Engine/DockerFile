@@ -8,6 +8,8 @@ COPY models.py /app
 
 COPY user_operations.py /app
 
+COPY schemas.py /app
+
 COPY requirements.txt /app
 
 COPY instance /app/instance
