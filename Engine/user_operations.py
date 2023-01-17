@@ -17,11 +17,9 @@ def login_user(db, user_data):
         return 404, None
 
 
-def get_user(db, user_data):
-    print("user_data:", user_data, flush=True)
-
-    id = user_data.get('id')
-
+def get_user(db, id):
+    print("user_data:", id, flush=True)
+    
     if id == None:
         return 404, None
 

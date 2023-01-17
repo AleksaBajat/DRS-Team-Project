@@ -10,7 +10,7 @@ function login(){
             processData: false,
             contentType: false,
             success: function (response) {
-                window.location.reload()
+                window.location.href="/index" 
             }
         });
     }catch(e){

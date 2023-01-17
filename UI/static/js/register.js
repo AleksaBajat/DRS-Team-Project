@@ -12,7 +12,9 @@ function register(){
             processData: false,
             contentType: false,
             success: function (response) {
-                console.info(response);        
+                console.info(response);       
+                alert("Successfully registered!")
+                window.location.href="/login" 
             }
         });
     }catch(e){

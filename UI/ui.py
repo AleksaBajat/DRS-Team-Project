@@ -1,6 +1,7 @@
 from flask import Flask, render_template,url_for,request, make_response, session, redirect
 from flask_session import Session
 import requests
+import json
 
 app = Flask(__name__)
 
@@ -11,9 +12,12 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-@app.route('/')
+@app.route('/index')
 def index():
-    return render_template('index.html')
+    values = {
+            "user_id" : session.get('user_id')
+        }
+    return render_template('index.html', **values)
 
 @app.route('/check')
 def check():
@@ -37,11 +41,30 @@ def login():
             res = response.json()
             print(res['user_id'], flush=True)            
             session['user_id'] = res['user_id']
-            return make_response('Login successful!', 200)
+            return render_template('index.html')
         elif response.status_code == 404:
             return make_response('Login unsuccessful. Check your credentials and try again!', 404)
 
         return make_response('Login unsuccessful. Server error.', 500)
+
+@app.route('/profile')
+def profile():
+    values = {
+            "user_id" : session.get('user_id')
+        }
+    url = "http://engine:8081/profile"
+    params_arg = {'id': session.get('user_id')}
+    response = requests.get(url,params=params_arg)
+    if response.status_code == 200:
+            res = response.json()
+            print(res, flush=True)           
+            return render_template('profile.html', user=res, **values)
+    
+@app.route('/logout')
+def logout():
+    session.clear();      
+    return render_template('index.html')
+    
 
 @app.route('/register', methods=['GET','POST'])
 def register():
