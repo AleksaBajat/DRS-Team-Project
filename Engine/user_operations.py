@@ -17,13 +17,13 @@ def login_user(db, user_data):
         return 404, None
 
 
-def get_user(db, id):
-    print("user_data:", id, flush=True)
+def get_user(db, data):
+    print("user_data:", data, flush=True)
     
-    if id == None:
+    if data == None:
         return 404, None
 
-    user = db.session.query(User).filter_by(id=id).first()    
+    user = db.session.query(User).filter_by(id=data['id']).first()    
 
     exists = user is not None
 

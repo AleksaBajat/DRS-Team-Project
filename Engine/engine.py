@@ -32,18 +32,6 @@ def login():
         else:
             return make_response('Login failed', status_code)
 
-@app.route("/profile", methods=['GET'])
-def profile():
-    if request.method == 'GET':
-        args = request.args
-        print(args, flush=True)
-        status_code, user = get_user(db, args['id'])  
-        print(user, flush=True)
-        if status_code == 200:
-            return make_response(jsonify(user), status_code)
-        else:
-            return make_response('Error', status_code)
-
 @app.route("/user")
 def user():
     if request.method == 'GET':

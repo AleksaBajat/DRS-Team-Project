@@ -12,6 +12,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+@app.route('/')
 @app.route('/index')
 def index():
     values = {
@@ -49,16 +50,17 @@ def login():
 
 @app.route('/profile')
 def profile():
-    values = {
-            "user_id" : session.get('user_id')
-        }
-    url = "http://engine:8081/profile"
-    params_arg = {'id': session.get('user_id')}
-    response = requests.get(url,params=params_arg)
+    id = session.get('user_id')    
+    url = "http://engine:8081/user"
+    
+    response = requests.get(url,json={'id': id})    
+
     if response.status_code == 200:
-            res = response.json()
-            print(res, flush=True)           
-            return render_template('profile.html', user=res, **values)
+        values = {
+            "user_id" : id
+        }
+        res = response.json()        
+        return render_template('profile.html', user=res, **values)
     
 @app.route('/logout')
 def logout():
@@ -93,6 +95,7 @@ def edit_profile():
             response = requests.get(url, json={"id":id})
 
             res = response.json()
+            res['user_id'] = id
 
             print(res, flush=True)
 
