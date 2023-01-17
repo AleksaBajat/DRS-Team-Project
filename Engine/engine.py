@@ -4,8 +4,6 @@ from models import db
 from user_operations import add_user, login_user, get_user, update_user
 import os
 
-
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///crypto_chiefs.db'
@@ -14,8 +12,6 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-
-
 
 @app.route("/register", methods=['POST'])
 def register():
@@ -39,17 +35,12 @@ def login():
 @app.route("/profile", methods=['GET'])
 def profile():
     if request.method == 'GET':
-        response= {
-            "username":"Jovan" ,
-            "email" : "jovan.peskanov@gmail.com" ,
-            "firstName": "Jovan", 
-            "lastName": "Peskanov",
-            "address":"Milana Grubanova 44" , 
-            "city":"Becej",
-            "country":"Serbia",
-            "phoneNumber":"0621355990",
-            }
-        return make_response(json.dumps(response), 200)
+        status_code, user = get_user(db, 1)  
+        
+        if status_code == 200:
+            return make_response(jsonify(user), status_code)
+        else:
+            return make_response('Error', status_code)
 
 
 @app.route("/user")
