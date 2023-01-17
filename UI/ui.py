@@ -51,6 +51,13 @@ def profile():
     x=json.loads(response.text)
     return render_template('profile.html',user=x)
 
+@app.route('/profile')
+def profile():
+    url = "http://engine:8081/profile"
+    response = requests.get(url)
+    x=json.loads(response.text)
+    return render_template('profile.html',user=x)
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'GET':
