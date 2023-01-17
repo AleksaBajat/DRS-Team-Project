@@ -1,0 +1,87 @@
+.login-container{ 
+    margin:20px;
+    width: 50%;
+    float: left;
+    color: #ffffff;
+   
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
+    padding: 1.5rem;
+}
+
+h1{
+    color: white;
+    font-size: 30px;
+    font-weight:bold;
+}
+h3{color: white;}
+a{
+    color: #c41463;
+}
+a:hover{
+    color: #162a87;
+}
+.box{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.login-form-item{
+    padding: 3px;
+    align-items: left;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0px 2px 0px 2px;
+  text-align: center;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  padding: 0px 2px 0px 2px;
+  text-align: center;
+}
+
+.submit-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn{
+    float: left;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #0F0326;
+    text-align: center;
+    border-radius: 30px;
+    margin: 10px;
+    box-shadow: 0 0 1pt 1pt white;
+    padding: 0px 10px 0px 10px;
+}
+
+.read_bt {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #0F0326;
+    text-align: center;
+    border-radius: 30px;
+    margin: 10px;
+    box-shadow: 0 0 1pt 1pt white;
+}
+.read_bt:hover {
+    background-color: purple;
+    color: white;
+}

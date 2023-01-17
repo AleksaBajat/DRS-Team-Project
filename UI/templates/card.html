@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+   
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+{% endblock %}
+
+{% block scripts %} 
+    {{ super() }}
+{% endblock %}
+
+{% block head %}
+  <title>Crypto chiefs</title>
+{% endblock %} 
+
+{% block body %}
+<div class="foundation">
+    <div class="login-container">
+        <h1>Crypto Chiefs - My Card</h1>
+        {% if verified %}
+        <h3>Transfer money to online crypto account</h3>
+        {% else %}
+        <h3>Add card</h3>
+        {% endif %}
+        <div class="box">
+            {% if not verified %}
+            <form class="login-form-container">
+                <div class="login-form-item row">
+                    <span class="col-sm-1"></span>
+                    <label class="col-sm-5">Card Number:</label>
+                    <input class="col-sm-5" type="text" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX">
+                </div>
+                
+                <div class="login-form-item row">
+                    <span class="col-sm-1"></span>
+                    <label class="col-sm-5">Name:</label>
+                    <input class="col-sm-5" type="text" name="name">
+                </div>  
+                <div class="login-form-item row">
+                    <span class="col-sm-1"></span>
+                    <label class="col-sm-5">Expiration Date:</label>
+                    <div class="col-sm-5 row">
+                        <input class="col-sm-2" type="number" name="day">
+                        <span class="col-sm-1">-</span>
+                        <input class="col-sm-2" type="number" name="month">
+                        <span class="col-sm-7"></span>
+                    </div>
+                </div>  
+                <div class="login-form-item row">
+                    <span class="col-sm-1"></span>
+                    <label class="col-sm-5">CSC:</label>
+                    <input class="col-sm-2" type="number" name="csc">
+                </div>  
+                {% else %}
+                <div class="login-form-item row">
+                    <span class="col-sm-1"></span>
+                    <label class="col-sm-5">Amount:</label>
+                    <input class="col-sm-5" type="number" name="money">
+                </div>  
+                {% endif %}
+                <div class="login-form-item row">
+                    <div class="submit-wrapper">
+                        {% if verified %}
+                        <button class="submit-btn" type="submit">Transfer</button>
+                        {% else %}
+                        <button class="submit-btn" type="submit">Add Card</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

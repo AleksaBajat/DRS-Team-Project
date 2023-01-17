@@ -24,6 +24,12 @@ def index():
 def check():
     return "200 - OK - UI is up!"
 
+@app.route('/card', methods=['GET', 'POST'])
+def add_card():
+    verified = True
+    if(request.method == 'GET'):
+        return render_template('card.html', verified=verified)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':                
