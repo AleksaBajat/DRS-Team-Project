@@ -26,9 +26,37 @@ def check():
 
 @app.route('/card', methods=['GET', 'POST'])
 def add_card():
-    verified = True
+    id = session.get('user_id')    
+
     if(request.method == 'GET'):
-        return render_template('card.html', verified=verified)
+        url = "http://engine:8081/user"
+        response = requests.get(url,json={'id': id})    
+
+        if response.status_code == 200:
+            res = response.json()
+            session['verified'] = res['verified']
+        else:
+            session['verified'] = False
+
+        values = {
+                "user_id" : session.get('user_id'),
+                "verified" : session.get('verified')
+            }
+        return render_template('card.html', **values)
+
+    if(request.method == 'POST'):
+        url = "http://engine:8081/verify"
+        values = {
+            "data": request.form,
+            "id": id
+        }
+        print(values, flush=True)
+        response = requests.post(url, json=values)
+        if response.status_code == 200:
+            return render_template('index.html')
+        else:
+            return make_response("Internal server error", response.status_code)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -56,7 +84,7 @@ def login():
 
 @app.route('/profile')
 def profile():
-    id = session.get('user_id')    
+    id = session.get('user_id')
     url = "http://engine:8081/user"
     
     response = requests.get(url,json={'id': id})    

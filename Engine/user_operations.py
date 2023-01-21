@@ -95,12 +95,30 @@ def update_user(db,user_data):
             User.query.filter_by(id=user_data['id']).update(user_data)    
         else: 
             status_code = 404
-        
-    
+                
         db.session.commit()    
     except Exception as e:
         print(e, flush=True)
         db.session.rollback()
+        status_code = 500
+
+    return status_code
+
+def verify_user(db, user_id):
+    status_code = 200
+
+    try:  
+        print("user_id:", user_id, flush=True)
+
+        user = db.session.query(User).filter_by(id=user_id).first()
+        if user:
+            user.verified = True
+        else: 
+            status_code = 404
+                
+        db.session.commit()
+    except Exception as e:
+        print(e, flush=True)
         status_code = 500
 
     return status_code

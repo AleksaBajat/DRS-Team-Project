@@ -1,7 +1,7 @@
 from flask import Flask, request, make_response,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from models import db
-from user_operations import add_user, login_user, get_user, update_user
+from user_operations import add_user, login_user, get_user, update_user, verify_user
 import os
 
 app = Flask(__name__)
@@ -52,6 +52,17 @@ def update():
     data = request.get_json()
     status_code = update_user(db, data)
     return make_response('Update user',status_code)
+
+@app.route("/verify", methods=['POST'])
+def verify():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data, flush=True) 
+        status_code = verify_user(db, data['id'])
+        if status_code == 200:
+            return make_response('User verified', status_code)
+        else:
+            return make_response('User not verified', status_code)
 
 if __name__ == '__main__':    
     app.run(debug=True)    
