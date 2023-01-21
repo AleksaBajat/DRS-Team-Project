@@ -1,4 +1,4 @@
-from models import User
+from models import User, Account
 from schemas import UserSchema
 
 user_schema = UserSchema()
@@ -45,8 +45,11 @@ def add_user(db,user_data):
 
     new_user = User(name=user_data['name'], lastName=user_data['lastName'], email=user_data['email'], address=user_data['address'],city=user_data['city'], country=user_data['country'], phoneNumber=user_data['phoneNumber'],password=user_data['password'])    
 
+    new_account = Account(user_id=new_user.id, balance=0, currency='$')
+
     try:
-        db.session.add(new_user)
+        db.session.add(new_user)        
+        db.session.add(new_account)
         db.session.commit()
         status_code = 200
     except Exception as e:
@@ -81,6 +84,7 @@ def update_user(db,user_data):
         db.session.commit()    
     except Exception as e:
         print(e, flush=True)
+        db.session.rollback()
         status_code = 500
 
     return status_code
