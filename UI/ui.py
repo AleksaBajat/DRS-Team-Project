@@ -24,6 +24,22 @@ def index():
 def check():
     return "200 - OK - UI is up!"
 
+@app.route('/transferFromCard', methods=['POST'])
+def transfer_money_from_card():
+    id = session.get('user_id')    
+    if(request.method == 'POST'):
+        url = "http://engine:8081/transferFromCard"
+        values = {
+            "data": request.form,
+            "id": id
+        }
+        print(values, flush=True)
+        response = requests.post(url, json=values)
+        if response.status_code == 200:
+            return render_template('index.html')
+        else:
+            return make_response("Internal server error", response.status_code)
+
 @app.route('/card', methods=['GET', 'POST'])
 def add_card():
     id = session.get('user_id')    

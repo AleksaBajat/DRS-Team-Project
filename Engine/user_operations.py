@@ -75,8 +75,6 @@ def add_user(db,user_data):
 
     return status_code
 
-
-
 def update_user(db,user_data):  
     status_code = 200
 
@@ -122,3 +120,4 @@ def verify_user(db, user_id):
         status_code = 500
 
     return status_code
+    

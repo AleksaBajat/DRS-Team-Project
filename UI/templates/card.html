@@ -26,8 +26,8 @@
         <h3>{{ verified }}</h3>
         {% endif %}
         <div class="box">
-            {% if not verified %}
             <form id="card-form" class="login-form-container">
+                {% if not verified %}
                 <div class="login-form-item row">
                     <span class="col-sm-1"></span>
                     <label class="col-sm-5">Card Number:</label>
@@ -64,7 +64,7 @@
                 <div class="login-form-item row">
                     <div class="submit-wrapper">
                         {% if verified %}
-                        <button class="submit-btn" type="button">Transfer</button>
+                        <button class="submit-btn" type="button" onclick="transferMoney()">Transfer</button>
                         {% else %}
                         <button class="submit-btn" type="button" onclick="addCard()">Add Card</button>
                         {% endif %}

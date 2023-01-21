@@ -1,5 +1,6 @@
 from flask import Flask, request, make_response,jsonify
 from flask_sqlalchemy import SQLAlchemy
+from account_operations import transfer_from_card
 from models import db
 from user_operations import add_user, login_user, get_user, update_user, verify_user
 import os
@@ -63,6 +64,16 @@ def verify():
             return make_response('User verified', status_code)
         else:
             return make_response('User not verified', status_code)
+
+@app.route("/transferFromCard", methods=['POST'])
+def transfer_from_card_to_account():
+    if(request.method == 'POST'):
+        data = request.get_json()
+        status_code = transfer_from_card(db, data['id'], data['data']['money'])
+        if status_code == 200:
+            return make_response('Successifully transfered', status_code)
+        else:
+            return make_response('Money not transfered', status_code)
 
 if __name__ == '__main__':    
     app.run(debug=True)    
