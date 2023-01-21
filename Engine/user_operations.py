@@ -33,6 +33,22 @@ def get_user(db, data):
     else:
         return 404, None
 
+def get_user_by_email(db, data):
+    print("data:", data, flush=True)
+
+    if data == None:
+        return 404, None
+
+    user = db.session.query(User).filter_by(email=data['email']).first()    
+
+    exists = user is not None
+
+    if exists:
+        user = user_schema.dump(user)
+        return 200, user
+    else:
+        return 404, None
+
 
 def add_user(db,user_data):    
     print("user_data:", user_data, flush=True)
@@ -45,10 +61,10 @@ def add_user(db,user_data):
 
     new_user = User(name=user_data['name'], lastName=user_data['lastName'], email=user_data['email'], address=user_data['address'],city=user_data['city'], country=user_data['country'], phoneNumber=user_data['phoneNumber'],password=user_data['password'])    
 
-    new_account = Account(user_id=new_user.id, balance=0, currency='$')
-
     try:
         db.session.add(new_user)        
+        db.session.flush()
+        new_account = Account(user_id=new_user.id, balance=0, currency='$')
         db.session.add(new_account)
         db.session.commit()
         status_code = 200
