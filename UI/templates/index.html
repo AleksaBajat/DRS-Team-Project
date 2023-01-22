@@ -38,7 +38,15 @@
                 <!-- /Crypto Converter ⚡ Widget -->
             </div>
             <div class="start_bt">
-              <div class="read_bt" ><a href="#" >Exchange</a></div>
+              {% if user_id %}
+                {% if verified %}
+                  <div class="read_bt"><a href="/buyCrypto">Exchange</a></div>
+                {% else %}
+                  <div class="read_bt"><a href="/card">Exchange</a></div>
+                {% endif %}
+              {% else %}
+                <div class="read_bt"><a href="/login">Exchange</a></div>
+              {% endif %}
             </div>
           </div>
 
@@ -52,7 +60,15 @@
                 <!-- /Crypto Converter ⚡ Widget -->
             </div>
             <div class="start_bt">
-              <div class="read_bt" ><a href="#" >Exchange</a></div>
+              {% if user_id %}
+              {% if verified %}
+                <div class="read_bt"><a href="/buyCrypto">Exchange</a></div>
+              {% else %}
+                <div class="read_bt"><a href="/card">Exchange</a></div>
+              {% endif %}
+            {% else %}
+              <div class="read_bt"><a href="/login">Exchange</a></div>
+            {% endif %}
             </div>
             
           </div>
@@ -66,7 +82,15 @@
                 <!-- /Crypto Converter ⚡ Widget -->
             </div>
             <div class="start_bt">
-              <div class="read_bt"><a href="#">Exchange</a></div>
+              {% if user_id %}
+              {% if verified %}
+                <div class="read_bt"><a href="/buyCrypto">Exchange</a></div>
+              {% else %}
+                <div class="read_bt"><a href="/card">Exchange</a></div>
+              {% endif %}
+            {% else %}
+              <div class="read_bt"><a href="/login">Exchange</a></div>
+            {% endif %}
             </div>
           </div>
 
@@ -80,7 +104,15 @@
                 <!-- /Crypto Converter ⚡ Widget -->
             </div>
             <div class="start_bt">
-              <div class="read_bt"><a href="#">Exchange</a></div>
+              {% if user_id %}
+              {% if verified %}
+                <div class="read_bt"><a href="/buyCrypto">Exchange</a></div>
+              {% else %}
+                <div class="read_bt"><a href="/card">Exchange</a></div>
+              {% endif %}
+            {% else %}
+              <div class="read_bt"><a href="/login">Exchange</a></div>
+            {% endif %}
             </div>
           </div> 
         </div>
