@@ -4,6 +4,7 @@ from account_operations import transfer_from_card, buy_crypto_with_dollar
 from models import db
 from user_operations import add_user, login_user, get_user, update_user, verify_user
 from transaction_operations import transaction_ui, create_transaction
+from account_operations import get_user_currencies
 import os
 
 app = Flask(__name__)
@@ -48,6 +49,19 @@ def user():
         else:
             return make_response('Get user failed.', status_code)
 
+@app.route("/userCurrencies")
+def userCurrencies():
+    if request.method == 'GET':
+        data = request.get_json()
+
+        print(data, flush=True)
+
+        status_code, accounts = get_user_currencies(db, data)
+
+        if status_code == 200:
+            return make_response(jsonify(accounts), status_code)
+        else:
+            return make_response('Get accounts failed.', status_code)
 
 @app.route("/updateUser", methods=['POST'])
 def update():

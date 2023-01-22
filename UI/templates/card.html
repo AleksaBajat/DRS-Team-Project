@@ -1,19 +1,38 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
-    {{ super() }}
-   
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+{{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
 {% endblock %}
 
-{% block scripts %} 
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/card.js') }}"></script>
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/card.js') }}"></script>
+<script>
+   function slice(input) {
+        if (input.value.length > input.maxLength) 
+            input.value = input.value.slice(0, input.maxLength);
+    }
+    function isNumber(char) {
+        return /^\d$/.test(char);
+    }
+    function formatCreditCard(input) {
+        if(!isNumber(input.value[input.value.length-1]))
+            document.getElementById("cardNumberValidation").innerText="*Incorrect card number";
+            else
+            document.getElementById("cardNumberValidation").innerText="";
+        var index = input.value.lastIndexOf('-');
+        var test = input.value.substr(index + 1);
+        if (test.length === 4 && input.value.length!=19)
+            input.value = input.value + '-';
+    }
+</script>
 {% endblock %}
 
 {% block head %}
-  <title>Crypto chiefs</title>
-{% endblock %} 
+<title>Crypto chiefs</title>
+{% endblock %}
 
 {% block body %}
 <div class="foundation">
@@ -23,43 +42,45 @@
         <h3>Transfer money to online crypto account</h3>
         {% else %}
         <h3>Add card</h3>
-        <h3>{{ verified }}</h3>
         {% endif %}
         <div class="box">
-            <form id="card-form" class="login-form-container">
+            <form id="card-form" class="login-form-container" onsubmit="validateCard()">
                 {% if not verified %}
                 <div class="login-form-item row">
-                    <span class="col-sm-1"></span>
+                    <span  class="col-sm-1"></span>
                     <label class="col-sm-5">Card Number:</label>
-                    <input class="col-sm-5" type="text" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX">
+                    <div class="col-sm-5 row">
+                        <label for="cardNumberValidation" id="cardNumberValidation" style="color: red;"></label>
+                        <input  type="text" name="cardNumber" id="cardNumber" maxlength="19" oninput="formatCreditCard(this)" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+                    </div>
                 </div>
-                
+
                 <div class="login-form-item row">
                     <span class="col-sm-1"></span>
                     <label class="col-sm-5">Name:</label>
-                    <input class="col-sm-5" type="text" name="name">
-                </div>  
+                    <input class="col-sm-5" type="text" name="name" placeholder="Name on the card" required>
+                </div>
                 <div class="login-form-item row">
                     <span class="col-sm-1"></span>
                     <label class="col-sm-5">Expiration Date:</label>
                     <div class="col-sm-5 row">
-                        <input class="col-sm-2" type="number" name="day">
+                        <input class="col-sm-2" type="number" name="month" placeholder="MM" oninput="slice(this)" maxlength="2" required>
                         <span class="col-sm-1">-</span>
-                        <input class="col-sm-2" type="number" name="month">
+                        <input class="col-sm-2" type="number" name="year" max="12" placeholder="YY" oninput="slice(this)" maxlength="2" required>
                         <span class="col-sm-7"></span>
                     </div>
-                </div>  
+                </div>
                 <div class="login-form-item row">
                     <span class="col-sm-1"></span>
-                    <label class="col-sm-5">CSC:</label>
-                    <input class="col-sm-2" type="number" name="csc">
-                </div>  
+                    <label class="col-sm-5">CSC/CVV:</label>
+                    <input class="col-sm-2" name="csc" oninput="slice(this)" type = "number" maxlength = "3" placeholder="CSC/CVV" required>
+                </div>
                 {% else %}
                 <div class="login-form-item row">
                     <span class="col-sm-1"></span>
                     <label class="col-sm-5">Amount:</label>
                     <input class="col-sm-5" type="number" name="money">
-                </div>  
+                </div>
                 {% endif %}
                 <div class="login-form-item row">
                     <div class="submit-wrapper">
@@ -74,6 +95,4 @@
         </div>
     </div>
 </div>
-
-
 {% endblock %}

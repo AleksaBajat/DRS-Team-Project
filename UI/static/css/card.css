@@ -69,6 +69,10 @@ input[type=number] {
     box-shadow: 0 0 1pt 1pt white;
     padding: 0px 10px 0px 10px;
 }
+.submit-btn:hover{
+    background-color: #c41463;
+    color: white;
+}
 
 .read_bt {
     width: 100%;
@@ -84,4 +88,10 @@ input[type=number] {
 .read_bt:hover {
     background-color: purple;
     color: white;
+}
+
+
+.crypto-popup{
+    color: white !important;
+    background-color: #162a87;
 }

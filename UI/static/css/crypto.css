@@ -10,6 +10,7 @@
     box-shadow: 0 0 1pt 1pt white;
     border-radius: 30px;
     padding: 10px;
+    
 }
 
 h1{
@@ -79,13 +80,15 @@ a:hover{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
     border-radius: 2rem;
     padding: 4rem;
+    
 }
 
 .crypto-popup h2, span{
-    color: black !important;
+    color: white ;
     text-align: center;
 }
 
@@ -95,13 +98,18 @@ a:hover{
 
 .buy-btn{
     font-size: 16px;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #0F0326;
     text-align: center;
     border-radius: 30px;
     margin: 10px;
     margin-top: 2rem;
-    border: 2px black solid;
+    border: 2px white solid;
     padding: 0px 1rem;
     cursor: pointer;
+}
+
+.buy-btn:hover{
+    background-color: #c41463;
+    color: white;
 }
