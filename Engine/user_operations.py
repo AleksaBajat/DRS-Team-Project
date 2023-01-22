@@ -83,9 +83,10 @@ def update_user(db,user_data):
 
         user = User.query.filter_by(id=user_data['id']).first()
 
-        if not (user_data['password'] != "" and user_data['repeatPassword'] != "" and user_data['password'] != user_data['repeatPassword']):
+        if not (user_data['password'] != "" and user_data['repeatPassword'] != "" and user_data['password'] == user_data['repeatPassword']):            
             del user_data['password']
-            del user_data['repeatPassword']
+            
+        del user_data['repeatPassword']
 
         exists = db.session.query(User).filter_by(id=user_data['id']).first() is not None
 

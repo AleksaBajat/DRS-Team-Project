@@ -38,21 +38,19 @@ def finish_transaction(db, transaction_id, amount, sender_id, recipient_id):
         time.sleep(20)
         state = 'Denied'
         transaction = db.session.query(Transaction).filter_by(id=transaction_id).first()    
+        
 
-        status_sender,sender = get_user(db, {"id":transaction.sender})
-        status_recipient,recipient = get_user(db, {"id":transaction.recipient})
-
-        sender_account = db.session.query(Account).filter_by(user_id=sender['id'], currency=transaction.currency).first()
+        sender_account = db.session.query(Account).filter_by(user_id=sender_id, currency=transaction.currency).first()
 
         if float(amount) < float(sender_account.balance):
             sender_account.balance = str(float(sender_account.balance) - float(amount))
 
-            recipient_account = db.session.query(Account).filter_by(user_id=recipient['id'],currency=transaction.currency).first()
+            recipient_account = db.session.query(Account).filter_by(user_id=recipient_id,currency=transaction.currency).first()
 
             if recipient_account is not None:
                 recipient_account.balance = str(float(recipient_account.balance) + float(amount))
             else:
-                recipient_account = Account(balance=amount,currency='$',user_id=recipient['id'])
+                recipient_account = Account(balance=amount,currency='$',user_id=recipient_id)
 
             db.session.add(sender_account)
             db.session.add(recipient_account)
