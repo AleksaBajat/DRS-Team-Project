@@ -19,14 +19,15 @@ class User(db.Model):
 
 class Account(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    balance = db.Column(db.Integer, default=0)
+    balance = db.Column(db.Float, default=0)
     currency = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
 
-class Transaction(db.Model):
+class Transaction(db.Model):    
     id = db.Column(db.String, primary_key=True)
     sender = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     recipient = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
+    currency = db.Column(db.String, nullable=False)
     state = db.Column(db.String, default="Processing")

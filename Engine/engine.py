@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from account_operations import transfer_from_card, buy_crypto_with_dollar
 from models import db
 from user_operations import add_user, login_user, get_user, update_user, verify_user
+from transaction_operations import transaction_ui, create_transaction
 import os
 
 app = Flask(__name__)
@@ -53,6 +54,27 @@ def update():
     data = request.get_json()
     status_code = update_user(db, data)
     return make_response('Update user',status_code)
+
+
+@app.route("/transaction/ui", methods=['GET'])
+def transaction_ui_data():
+    data = request.get_json()    
+
+    status_code, ui_data = transaction_ui(db, data['id'])
+
+    if status_code == 200:
+        return make_response(jsonify(ui_data), status_code)
+    else:
+        return make_response('Get user failed.', status_code)
+
+@app.route('/transaction', methods=["POST"])
+def transaction():
+    if request.method == "POST":
+        data = request.get_json() 
+
+        status_code, response = create_transaction(db, data)
+
+        return make_response(response, status_code)
 
 @app.route("/verify", methods=['POST'])
 def verify():

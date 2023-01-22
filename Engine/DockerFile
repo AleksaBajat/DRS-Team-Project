@@ -10,6 +10,8 @@ COPY user_operations.py /app
 
 COPY account_operations.py /app
 
+COPY transaction_operations.py /app
+
 COPY schemas.py /app
 
 COPY requirements.txt /app

@@ -223,6 +223,41 @@ def edit_profile():
             return make_response('Unable to save changes. Server error!', 500)
         else:
             redirect('/login')
+
+
+@app.route('/transaction', methods=['GET', 'POST'])
+def transaction():
+    if request.method == 'GET':
+        id = session.get('user_id')
+        if id:
+            url = "http://engine:8081/transaction/ui"
+
+            response = requests.get(url, json={"id":id})
+
+            res = response.json()
+            res['user_id'] = id
+
+            print(res, flush=True)
+
+            return render_template('transaction.html', **res)
+        else:
+            redirect('/login')
+    elif request.method == 'POST':
+        id = session.get('user_id')
+        if id:
+            url = "http://engine:8081/transaction"            
+
+            data = dict(request.form)
+            data['id'] = id
+
+            print("TRANSACTION DATA " + str(data), flush=True)
+
+            response = requests.post(url, json=data)
+
+            if response.status_code == 200:            
+                return make_response('Transaction in progress!', 200)
+            elif response.status_code == 404:
+                return make_response('Unable to begin the transaction!', 400)                      
             
 
 if __name__ == '__main__':

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block scripts %} 
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/transaction.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+    <title>Crypto Chiefs - Transaction</title>
+{% endblock %} 
+
+{% block body %}
+<div class="foundation">
+    <div class="login-container">
+        
+    </div>
+    <div class="login-container">
+        <h1>Crypto Chiefs - Transaction</h1>
+        <h3>Sharing is caring!</h3>
+        <div class="box">
+            <form id="transaction-form" class="login-form-container">
+                <div class="login-form-item row">
+                    <span class="col-sm-3"></span>
+                    <label class="col-sm-2">Email:</label>
+                    <input class="col-sm-4" type="email" name="email">
+                </div>
+                
+                <div class="login-form-item row">
+                    <span class="col-sm-3"></span>
+                    <label class="col-sm-2">Amount:</label>
+                    <input class="col-sm-3" type="number" name="amount">
+                </div>  
+
+                <div class="login-form-item row">
+                    <span class="col-sm-3"></span>
+                    <label class="col-sm-2">Currency:</label>
+                    <select class="col-sm-2" name="currency">
+                        {% for currency in currencies %}
+                            <option value="{{currency}}">{{currency}}</option>
+                        {% endfor %}
+                    </select>
+                </div>  
+                <div class="login-form-item row">     
+                    <div class="start_bt">            
+                        <button class="read_bt" type="button" onclick="transaction()">Create transaction</button>
+                    </div>
+                </div>                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
