@@ -19,6 +19,22 @@
 <div class="foundation">
     <div class="login-container">
         
+            <table class="table table-accounts">
+                <tr class="m-auto">
+                    <th class="col">
+                        Balance
+                    </th>
+                    <th class="col">
+                        Currency
+                    </th>
+                </tr>
+                {% for account in accounts %}
+                <tr class="m-auto">
+                    <td class="col">{{account['balance']}}</td>
+                    <td class="col">{{account['currency']}}</td>
+                </tr>
+            </table>
+            {% endfor %}
     </div>
     <div class="login-container">
         <h1>Crypto Chiefs - Transaction</h1>
