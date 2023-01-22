@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crypto.css') }}">
+{% endblock %}
+
+{% block scripts %} 
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/crypto.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+  <title>Crypto chiefs</title>
+{% endblock %} 
+
+{% block body %}
+<div class="foundation">
+    <div class="crypto-container">
+        <h1>Cryptocurrency Prices</h1>
+        <div class="table-wrapper">
+            <table class="crypto-table">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Value ($)</th>
+                </tr>
+                {% for item in data['data'] %}
+                <tr class="crypto-row" id="{{item.id}}">
+                    <td>{{item['symbol']}}</td>
+                    <td>{{item['name']}}</td>
+                    <td>{{'%0.4f' % item['quote']['USD']['price']|float}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="show-div">
+        <div class="crypto-popup-wrapper">
+            <div class="crypto-popup">
+                <h2 id="buyHeader"></h2>
+                <div class="price">
+                    <span id="priceValue"></span>
+                    <span>$ = </span>
+                    <span id="mainValue">1</span>
+                    <span id="priceSymnol"></span>
+                </div>
+                
+                <form id="buy-form">
+                    <input type="number" id="money" value="0">
+                    <div class="buy-btn">
+                        <span>Buy</span>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

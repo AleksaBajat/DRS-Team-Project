@@ -74,3 +74,22 @@ text{
     color: white;
     
 }
+
+.crypto_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.crypto_bt{
+    cursor: pointer;
+    width: fit-content;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #0F0326;
+    text-align: center;
+    border-radius: 30px;
+    margin: 10px;
+    box-shadow: 0 0 1pt 1pt white;
+    padding: 0px 1rem;
+}

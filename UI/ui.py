@@ -3,6 +3,18 @@ from flask_session import Session
 import requests
 import json
 
+
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+parameters = {
+  'start':'1',
+  'limit':'10',
+  'convert':'USD'
+}
+headers = {
+  'Accepts': 'application/json',
+  'X-CMC_PRO_API_KEY': '1deb7305-08f6-40aa-82aa-b64f5ae29c49',
+}
+
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -23,6 +35,23 @@ def index():
 @app.route('/check')
 def check():
     return "200 - OK - UI is up!"
+
+@app.route('/buyCrypto', methods=['GET', 'POST'])
+def buy_crypto():
+    if request.method == 'GET':
+        data = ''
+        try:
+            response = requests.get(url, params=parameters, headers=headers)
+            data = json.loads(response.text)
+        except:
+            print("Error while fetching data", flush=True)
+
+        values = {
+            "user_id" : session.get('user_id'),
+            "data" : data
+        }
+
+        return render_template('buyCrypto.html', **values)
 
 @app.route('/transferFromCard', methods=['POST'])
 def transfer_money_from_card():

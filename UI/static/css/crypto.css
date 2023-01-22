@@ -1,0 +1,107 @@
+.crypto-container{ 
+    margin:20px;
+    width: 50%;
+    float: left;
+    color: #ffffff;
+   
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #0F0326;
+    box-shadow: 0 0 1pt 1pt white;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+h1{
+    color: white;
+    font-size: 30px;
+    font-weight:bold;
+}
+h3{color: white;}
+a{
+    color: #c41463;
+}
+a:hover{
+    color: #162a87;
+}
+
+.table-wrapper{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.crypto-table{
+    width: 100%;
+    text-align: left;
+}
+
+.crypto-table th{
+    border-bottom: 1px solid white;
+}
+
+.crypto-row:hover{
+    background-color: #c41463;
+}
+
+.crypto-row{
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.crypto-row td{
+    padding: .3rem;
+}
+
+#buy-form{
+    text-align: center;
+}
+
+.crypto-popup-wrapper{
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.9);
+}
+
+.show-div{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+}
+
+.crypto-popup{
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2rem;
+    padding: 4rem;
+}
+
+.crypto-popup h2, span{
+    color: black !important;
+    text-align: center;
+}
+
+.price{
+    padding: 1rem;
+}
+
+.buy-btn{
+    font-size: 16px;
+    color: black;
+    background-color: white;
+    text-align: center;
+    border-radius: 30px;
+    margin: 10px;
+    margin-top: 2rem;
+    border: 2px black solid;
+    padding: 0px 1rem;
+    cursor: pointer;
+}
