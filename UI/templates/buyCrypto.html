@@ -49,8 +49,10 @@
                 </div>
                 
                 <form id="buy-form">
-                    <input type="number" id="money" value="0">
-                    <div class="buy-btn">
+                    <input type="hidden" name="symbol" id="symbol">
+                    <input type="hidden" name="rate" id="rate">
+                    <input type="number" name="money" id="moneyDollar" value="0">
+                    <div class="buy-btn" onclick="submitCrypto()">
                         <span>Buy</span>
                     </div>
                 </form>

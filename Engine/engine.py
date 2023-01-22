@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response,jsonify
 from flask_sqlalchemy import SQLAlchemy
-from account_operations import transfer_from_card
+from account_operations import transfer_from_card, buy_crypto_with_dollar
 from models import db
 from user_operations import add_user, login_user, get_user, update_user, verify_user
 import os
@@ -74,6 +74,19 @@ def transfer_from_card_to_account():
             return make_response('Successifully transfered', status_code)
         else:
             return make_response('Money not transfered', status_code)
+
+
+@app.route("/buyCrypto", methods=['POST'])
+def buy_crypto():
+    if(request.method == 'POST'):
+        data = request.get_json()
+        status_code = buy_crypto_with_dollar(db, data)
+        if(status_code != 200 and status_code != 201):
+            return make_response('Internal server error', status_code)
+        else:
+            return make_response('Success', status_code)
+
+
 
 if __name__ == '__main__':    
     app.run(debug=True)    

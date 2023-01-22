@@ -4,7 +4,7 @@ import requests
 import json
 
 
-url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+crypto_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 parameters = {
   'start':'1',
   'limit':'10',
@@ -38,10 +38,14 @@ def check():
 
 @app.route('/buyCrypto', methods=['GET', 'POST'])
 def buy_crypto():
+    id = session.get('user_id')
+
     if request.method == 'GET':
         data = ''
         try:
-            response = requests.get(url, params=parameters, headers=headers)
+            print('hello', flush=True)
+            response = requests.get(crypto_url, params=parameters, headers=headers)
+            print('hello2', flush=True)
             data = json.loads(response.text)
         except:
             print("Error while fetching data", flush=True)
@@ -53,9 +57,27 @@ def buy_crypto():
 
         return render_template('buyCrypto.html', **values)
 
+    elif request.method == 'POST':
+        data = request.form
+        print(data, flush=True)
+
+        url = "http://engine:8081/buyCrypto"
+        values = {
+            'id' : id,
+            'data' : data
+        }
+        response = requests.post(url, json=values)
+        print(response, flush=True)
+        if(response.status_code != 200 and response.status_code != 201):
+            return make_response("Internal server error", response.status_code)
+        else:
+            return render_template('index.html')
+
+
+
 @app.route('/transferFromCard', methods=['POST'])
 def transfer_money_from_card():
-    id = session.get('user_id')    
+    id = session.get('user_id')
     if(request.method == 'POST'):
         url = "http://engine:8081/transferFromCard"
         values = {
@@ -68,6 +90,7 @@ def transfer_money_from_card():
             return render_template('index.html')
         else:
             return make_response("Internal server error", response.status_code)
+
 
 @app.route('/card', methods=['GET', 'POST'])
 def add_card():

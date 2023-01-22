@@ -30,8 +30,10 @@ $(document).ready(function() {
         $('.show-div').hide()
     })
 
-    $('#money').on('input', function () {
+    $('#moneyDollar').on('input', function () {
+        console.log('hello')
         let value = $(this).val()
+        console.log(value)
         if(value != undefined && value != 0){
             $('#priceValue').text(value)
             let main = ((1 / localStorage['price']) * value)
@@ -50,7 +52,31 @@ $(document).ready(function() {
     })
 
     $('.crypto-popup').click(function (e) {
-        console.log(e)
         e.stopPropagation()
     })
 });
+
+
+function submitCrypto(){
+    let symbol = $('#priceSymnol').text()
+    $('#symbol').val(symbol)
+    $('#rate').val(localStorage['price'])
+
+    try{
+        var form = document.getElementById('buy-form');
+        var formData = new FormData(form);        
+    
+        $.ajax({
+            type: "POST",        
+            url: "/buyCrypto",
+            data: formData,        
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                window.location.href="/index" 
+            }
+        });
+    }catch(e){
+        console.log(e)
+    }
+}
