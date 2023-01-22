@@ -154,15 +154,18 @@ def login():
 def profile():
     id = session.get('user_id')
     url = "http://engine:8081/user"
-    
-    response = requests.get(url,json={'id': id})    
+    urlCurrencies = "http://engine:8081/userCurrencies"
 
-    if response.status_code == 200:
+    response = requests.get(url,json={'id': id})    
+    responseCurrencies = requests.get(urlCurrencies,json={'id': id})
+
+    if response.status_code == 200 and responseCurrencies.status_code==200:
         values = {
             "user_id" : id
         }
-        res = response.json()        
-        return render_template('profile.html', user=res, **values)
+        res = response.json() 
+        currencies= responseCurrencies.json()
+        return render_template('profile.html', user=res,currencies=currencies['accounts'], **values)
     
 @app.route('/logout')
 def logout():

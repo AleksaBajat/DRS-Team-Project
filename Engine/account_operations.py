@@ -79,3 +79,20 @@ def subtract_from_account(db, user_id, value, currency):
         return 401
     except:
         return 401
+
+
+def get_user_currencies(db, data):
+    if data == None:
+        return 404, None
+    try:
+        accounts = db.session.query(Account).filter_by(user_id= data['id']).all()
+        exists = accounts is not None
+        if exists:
+            data = { "accounts": [account_schema.dump(account) for account in accounts]}
+            return 200, data
+        else:
+            return 404, None
+
+    except:
+        return 401
+

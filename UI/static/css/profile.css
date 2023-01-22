@@ -93,3 +93,8 @@ text{
     box-shadow: 0 0 1pt 1pt white;
     padding: 0px 1rem;
 }
+
+.crypto_bt:hover{
+    background-color: #c41463;
+    color: white;
+}
