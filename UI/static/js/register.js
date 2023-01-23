@@ -38,6 +38,11 @@ function ValidateForm() {
     password = document.getElementById('password').value;
     repeat = document.getElementById('repeat_password').value;
 
+    if(password != repeat){
+        alert("Passwords must match")
+        return false;
+    }
+
     if (!email.match(validRegex)) {
         alert("Invalid email address!");
         return false;

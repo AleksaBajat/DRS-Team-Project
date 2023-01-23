@@ -49,7 +49,7 @@ def swap_currencies():
         data = request.form
         print(data, flush=True)
 
-        url = "http://engine:8081/swapCrypto"
+        url = path_to_engine + "/swapCrypto"
         values = {
             'id' : id,
             'data' : data
