@@ -230,6 +230,8 @@ def register():
     elif request.method == 'POST':        
         url = path_to_engine + "/register"
 
+        print(url, flush=True)
+
         response = requests.post(url, json=request.form)
                 
         if response.status_code == 409:
