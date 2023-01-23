@@ -26,8 +26,13 @@ class Account(db.Model):
 
 class Transaction(db.Model):    
     id = db.Column(db.String, primary_key=True)
-    sender = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    recipient = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    
+    sender_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    recipient_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+    sender = db.relationship("User", foreign_keys=[sender_id])
+    recipient = db.relationship("User", foreign_keys=[recipient_id])
+
     amount = db.Column(db.Integer, nullable=False)
     currency = db.Column(db.String, nullable=False)
     state = db.Column(db.String, default="Processing")

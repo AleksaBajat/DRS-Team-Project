@@ -1,0 +1,36 @@
+{% extends 'layout.html' %} {% block styles %} {{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}" />
+{% endblock %} {% block scripts %} {{ super() }}
+{% endblock %} {% block head %}
+<title>Crypto Chiefs - Profile</title>
+{% endblock %} {% block body %}
+
+<div class="container">
+    <h3>Your transaction history - always remember</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in history %}
+            <tr>
+                <td>{{ transaction.sender }}</td>
+                <td>{{ transaction.recipient }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.currency }}</td>
+                <td>{{ transaction.state }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
