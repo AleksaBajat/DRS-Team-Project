@@ -165,4 +165,4 @@ def buy_crypto():
 
 
 if __name__ == '__main__':    
-    serve(app, host="0.0.0.0", port=8081, threads=4,workers=4)     
+    serve(app, host="0.0.0.0", port=8081, threads=4)     
