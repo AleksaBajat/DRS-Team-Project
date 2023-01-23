@@ -205,7 +205,7 @@ def profile():
 @app.route('/history')
 def history():
     id = session.get('user_id')
-    url = "http://engine:8081/history"
+    url = path_to_engine + "/history"
 
     response = requests.get(url,json={'id': id})    
 
