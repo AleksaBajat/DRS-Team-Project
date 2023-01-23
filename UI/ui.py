@@ -228,9 +228,7 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     elif request.method == 'POST':        
-        url = path_to_engine + "/register"
-
-        print(url, flush=True)
+        url = path_to_engine + "/register"        
 
         response = requests.post(url, json=request.form)
                 
