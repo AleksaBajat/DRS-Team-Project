@@ -180,7 +180,9 @@ def history():
         }
         res = response.json() 
         return render_template('history.html', history=res['transactions'], **values)
-    
+    else:
+        return render_template('history.html')
+
 @app.route('/logout')
 def logout():
     session.clear();      

@@ -99,5 +99,6 @@ def get_user_transactions(db, data):
         else:
             return 404, None
 
-    except:
-        return 401
+    except Exception as e:
+        print(e,flush=True)
+        return 401,None

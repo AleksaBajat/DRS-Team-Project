@@ -69,24 +69,25 @@ def history():
         data = request.get_json()
 
         status_code, transactions = get_user_transactions(db, data)
-        response = { "transactions" : []}
-
-        for transaction in transactions:
-            transactionDic = {
-                'id': transaction.id,
-                'sender_id': transaction.sender_id,
-                'recipient_id': transaction.recipient_id,
-                'sender': transaction.sender.email,
-                'recipient': transaction.recipient.email,
-                'recipient_id': transaction.recipient_id,
-                'amount': transaction.amount,
-                'currency': transaction.currency,
-                'state': transaction.state,
-                }
-                
-            response["transactions"].append(transactionDic)
+            
 
         if status_code == 200:
+            response = { "transactions" : []}
+        
+            for transaction in transactions:
+                transactionDict = {
+                    'id': transaction.id,
+                    'sender_id': transaction.sender_id,
+                    'recipient_id': transaction.recipient_id,
+                    'sender': transaction.sender.email,
+                    'recipient': transaction.recipient.email,
+                    'recipient_id': transaction.recipient_id,
+                    'amount': transaction.amount,
+                    'currency': transaction.currency,
+                    'state': transaction.state,
+                    }
+                    
+                response["transactions"].append(transactionDict)
             return make_response(jsonify(response), status_code)
         else:
             return make_response('Get transactions failed.', status_code)
