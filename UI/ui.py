@@ -15,6 +15,8 @@ headers = {
   'X-CMC_PRO_API_KEY': '1deb7305-08f6-40aa-82aa-b64f5ae29c49',
 }
 
+filtered_crypto_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -36,6 +38,18 @@ def index():
 def check():
     return "200 - OK - UI is up!"
 
+@app.route('/swap', methods=['GET', 'POST'])
+def swap_crypto():
+    if request.method == 'POST':
+        data = request.form
+        parameters = {
+            'symbol' : data['symbol'],
+            'convert' :  data['convert']
+            }
+        response = requests.get(filtered_crypto_url, params=parameters, headers=headers)
+        print(response, flush=True)
+        return response.text
+
 @app.route('/buyCrypto', methods=['GET', 'POST'])
 def buy_crypto():
     id = session.get('user_id')
@@ -43,9 +57,7 @@ def buy_crypto():
     if request.method == 'GET':
         data = ''
         try:
-            print('hello', flush=True)
             response = requests.get(crypto_url, params=parameters, headers=headers)
-            print('hello2', flush=True)
             data = json.loads(response.text)
         except:
             print("Error while fetching data", flush=True)

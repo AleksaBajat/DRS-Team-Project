@@ -32,10 +32,9 @@
         </thead>
         <tbody>
           {% for currency in currencies %}
-            <tr>
-                <td>{{ currency.currency }}</td>
+            <tr class="crypto_row">
+                <td id="currency">{{ currency.currency }}</td>
                 <td>{{ currency.balance }}</td>
-                
             </tr>
           {% endfor %}
         </tbody>
@@ -45,10 +44,45 @@
         <div class="crypto_bt" onclick="location.href='/buyCrypto';">
           <span>Buy crypto</span>
         </div>
+        <div class="crypto_bt" onclick="getCurrencies()">
+          <span>Swap Currencies</span>
+        </div>
       </div>
 
-
     </div>
+  </div>
+</div>
+
+<div class="show-div">
+  <div class="crypto-popup-wrapper">
+      <div class="crypto-popup">
+          <div class="values-wrapper">
+            <h2>Transfer</h2>
+            <span>From: </span>
+            <select class="from-select">
+            </select>
+            <span> To: </span>
+            <select class="to-select">
+            </select>
+          </div>
+          <div class="price">
+              <span id="fromValue"></span>
+              <span id="fromSymbol"></span>
+              <span> = </span>
+              <span id="toValue">1</span>
+              <span id="toSymbol"></span>
+          </div>
+          
+          <form id="buy-form">
+              <input type="hidden" name="symbol" id="symbol">
+              <input type="hidden" name="rate" id="rate">
+              <input type="number" name="money" id="moneyDollar" value="0">
+              <div class="buy-btn" onclick="submitCrypto()">
+                  <span>Buy</span>
+              </div>
+          </form>
+          
+      </div>
   </div>
 </div>
 {% endblock %}
