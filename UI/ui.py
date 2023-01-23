@@ -2,6 +2,7 @@ from flask import Flask, render_template,url_for,request, make_response, session
 from flask_session import Session
 import requests
 import json
+import os
 
 
 crypto_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
@@ -23,6 +24,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = 1800
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+path_to_engine = os.environ['ENGINE_URL']
 
 @app.route('/')
 @app.route('/index')
@@ -61,7 +63,7 @@ def buy_crypto():
         data = request.form
         print(data, flush=True)
 
-        url = "http://engine:8081/buyCrypto"
+        url = path_to_engine + "/buyCrypto"
         values = {
             'id' : id,
             'data' : data
@@ -79,7 +81,7 @@ def buy_crypto():
 def transfer_money_from_card():
     id = session.get('user_id')
     if(request.method == 'POST'):
-        url = "http://engine:8081/transferFromCard"
+        url = path_to_engine + "/transferFromCard"
         values = {
             "data": request.form,
             "id": id
@@ -97,7 +99,7 @@ def add_card():
     id = session.get('user_id')    
 
     if(request.method == 'GET'):
-        url = "http://engine:8081/user"
+        url = path_to_engine + "/user"
         response = requests.get(url,json={'id': id})    
 
         if response.status_code == 200:
@@ -113,7 +115,7 @@ def add_card():
         return render_template('card.html', **values)
 
     if(request.method == 'POST'):
-        url = "http://engine:8081/verify"
+        url = path_to_engine + "/verify"
         values = {
             "data": request.form,
             "id": id
@@ -136,7 +138,7 @@ def login():
         return render_template('login.html', **values)
 
     elif request.method == 'POST':
-        url = "http://engine:8081/login"
+        url = path_to_engine + "/login"
 
         response = requests.post(url, json=request.form)
 
@@ -153,8 +155,8 @@ def login():
 @app.route('/profile')
 def profile():
     id = session.get('user_id')
-    url = "http://engine:8081/user"
-    urlCurrencies = "http://engine:8081/userCurrencies"
+    url = path_to_engine + "/user"
+    urlCurrencies = path_to_engine + "/userCurrencies"
 
     response = requests.get(url,json={'id': id})    
     responseCurrencies = requests.get(urlCurrencies,json={'id': id})
@@ -178,7 +180,7 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     elif request.method == 'POST':        
-        url = "http://engine:8081/register"
+        url = path_to_engine + "/register"
 
         response = requests.post(url, json=request.form)
                 
@@ -195,7 +197,7 @@ def edit_profile():
     if request.method == 'GET':
         id = session.get('user_id')
         if id:
-            url = "http://engine:8081/user"
+            url = path_to_engine + "/user"
 
             response = requests.get(url, json={"id":id})
 
@@ -208,7 +210,7 @@ def edit_profile():
         else:
             redirect('/login')
     elif request.method == 'POST':
-        url = "http://engine:8081/updateUser"
+        url = path_to_engine + "/updateUser"
         
         id = session.get('user_id')
 
@@ -233,7 +235,7 @@ def transaction():
     if request.method == 'GET':
         id = session.get('user_id')
         if id:
-            url = "http://engine:8081/transaction/ui"
+            url = path_to_engine + "/transaction/ui"
 
             response = requests.get(url, json={"id":id})
 
@@ -248,7 +250,7 @@ def transaction():
     elif request.method == 'POST':
         id = session.get('user_id')
         if id:
-            url = "http://engine:8081/transaction"            
+            url = path_to_engine + "/transaction"            
 
             data = dict(request.form)
             data['id'] = id
@@ -264,4 +266,4 @@ def transaction():
             
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0",port=8081)
