@@ -1,4 +1,10 @@
 function transaction(){
+    value = $('input[name=amount]').val()
+    if(value == undefined || value <= 0){
+        alert('Value must be greater than 0')
+        return;
+    }
+
     form = document.getElementById("transaction-form")
     formData = new FormData(form)
 
@@ -9,7 +15,7 @@ function transaction(){
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response)            
+            alert(response)            
         }
     });
 }

@@ -1,8 +1,9 @@
 function addCard() {
     try {
         var form = document.getElementById('card-form');
-        if(!validateForm(form))
+        if(!validateForm(form)){
             throw new Error('Error');
+        }
         var formData = new FormData(form);
 
         $.ajax({
@@ -13,7 +14,15 @@ function addCard() {
             contentType: false,
             success: function (response) {
                 window.location.href = "/index"
-            }
+            },
+            error: function (ajaxContext) {
+                if(ajaxContext.status == 401){
+                    alert('Invalid card')
+                }
+                else{
+                    console.log(ajaxContext.responseText)
+                }
+            } 
         });
     } catch (e) {
         console.log(e)
@@ -23,6 +32,12 @@ function addCard() {
 
 
 function transferMoney() {
+    money = $('#money').val()
+    if(money == undefined || money <= 0){
+        alert('Value must be greater than 0')
+        return
+    }
+
     try {
         var form = document.getElementById('card-form');
         var formData = new FormData(form);

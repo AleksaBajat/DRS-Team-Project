@@ -114,8 +114,6 @@ $(document).ready(function() {
 
             from = localStorage['fromSymbol']
             to = localStorage['toSymbol']
-            console.log(from)
-            console.log(to)
             if(from == undefined) from = '$'
             if(to == undefined) to = '$'
 
@@ -179,7 +177,6 @@ function submitCrypto(){
         money = $('#moneyDollar').val()
         if(money <= 0){
             alert('Number must be greater than 0')
-            e.stopPropagation()
             return;
         }
 
@@ -196,7 +193,7 @@ function submitCrypto(){
                 $('#toValue').text(1)
                 $('#fromSymbol').text('$')
                 $('#toSymbol').text('$')
-                window.location.href="/index" 
+                window.location.reload()
             },
             error: function (ajaxContext) {
                 alert(ajaxContext.responseText)

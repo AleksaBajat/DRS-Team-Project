@@ -103,14 +103,20 @@ def update_user(db,user_data):
 
     return status_code
 
-def verify_user(db, user_id):
+def verify_user(db, data):
     status_code = 200
+
+    print(data, flush=True)
+    user_id = data['id']
 
     try:  
         print("user_id:", user_id, flush=True)
 
         user = db.session.query(User).filter_by(id=user_id).first()
         if user:
+            if not is_valid_card(data['data'], user.name):
+                return 401
+
             user.verified = True
         else: 
             status_code = 404
@@ -121,4 +127,19 @@ def verify_user(db, user_id):
         status_code = 500
 
     return status_code
+    
+def is_valid_card(data, user_name):
+    valid = True
+    if(data['cardNumber'] != '4242-4242-4242-4242'):
+        valid = False
+    if(data['month'] != '2'):
+        valid = False
+    if(data['year'] != '23'):
+        valid = False
+    if(data['csc'] != '123'):
+        valid = False
+    if(data['name'] != user_name):
+        valid = False
+
+    return valid
     

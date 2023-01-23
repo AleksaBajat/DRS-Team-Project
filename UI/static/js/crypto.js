@@ -1,10 +1,7 @@
 
 function buyCrypto(id){
-    console.log(item)
     var data = JSON.parse(item)
-    console.log(data)
     $('.show-div').show();
-    console.log(data.name)
 
     $('#buyHeader').text(item['name'])
 }
@@ -31,9 +28,7 @@ $(document).ready(function() {
     })
 
     $('#moneyDollar').on('input', function () {
-        console.log('hello')
         let value = $(this).val()
-        console.log(value)
         if(value != undefined && value != 0){
             $('#priceValue').text(value)
             let main = ((1 / localStorage['price']) * value)
@@ -62,6 +57,13 @@ function submitCrypto(){
     $('#symbol').val(symbol)
     $('#rate').val(localStorage['price'])
 
+    money = $('#moneyDollar').val()
+    
+    if(money == undefined || money <= 0){
+        alert("Money must be greater than 0")
+        return
+    }
+
     try{
         var form = document.getElementById('buy-form');
         var formData = new FormData(form);        
@@ -73,8 +75,17 @@ function submitCrypto(){
             processData: false,
             contentType: false,
             success: function (response) {
-                window.location.href="/index" 
-            }
+                window.location.reload()
+            },
+            error: function (ajaxContext) {
+                if(ajaxContext.status == 500){
+                    alert('You dont have enough money')
+                }
+                else{
+                    alert(ajaxContext.responseText)
+                }
+                
+            } 
         });
     }catch(e){
         console.log(e)

@@ -36,7 +36,7 @@
           {% for currency in currencies %}
             <tr class="crypto_row">
                 <td id="currency">{{ currency.currency }}</td>
-                <td>{{ currency.balance |round(5)}}</td>
+                <td>{{ currency.balance |round(8)}}</td>
             </tr>
           {% endfor %}
         </tbody>

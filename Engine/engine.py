@@ -124,7 +124,7 @@ def verify():
     if request.method == 'POST':
         data = request.get_json()
         print(data, flush=True) 
-        status_code = verify_user(db, data['id'])
+        status_code = verify_user(db, data)
         if status_code == 200:
             return make_response('User verified', status_code)
         else:
