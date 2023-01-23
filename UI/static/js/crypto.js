@@ -37,7 +37,7 @@ $(document).ready(function() {
         if(value != undefined && value != 0){
             $('#priceValue').text(value)
             let main = ((1 / localStorage['price']) * value)
-            main = Math.round(main * 100000) / 100000
+            main = Math.round(main * 10000000) / 10000000
 
             $('#mainValue').text(main)
         }

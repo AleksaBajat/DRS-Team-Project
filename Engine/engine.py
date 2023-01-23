@@ -1,9 +1,9 @@
 from flask import Flask, request, make_response,jsonify
 from flask_sqlalchemy import SQLAlchemy
-from account_operations import transfer_from_card, buy_crypto_with_dollar
+from account_operations import transfer_from_card, buy_crypto_with_dollar, swap_currencies
 from models import db
 from user_operations import add_user, login_user, get_user, update_user, verify_user
-from transaction_operations import transaction_ui, create_transaction
+from transaction_operations import transaction_ui, create_transaction,get_user_transactions
 from account_operations import get_user_currencies
 import os
 
@@ -63,6 +63,35 @@ def userCurrencies():
         else:
             return make_response('Get accounts failed.', status_code)
 
+@app.route("/history")
+def history():
+    if request.method == 'GET':
+        data = request.get_json()
+
+        status_code, transactions = get_user_transactions(db, data)
+            
+
+        if status_code == 200:
+            response = { "transactions" : []}
+        
+            for transaction in transactions:
+                transactionDict = {
+                    'id': transaction.id,
+                    'sender_id': transaction.sender_id,
+                    'recipient_id': transaction.recipient_id,
+                    'sender': transaction.sender.email,
+                    'recipient': transaction.recipient.email,
+                    'recipient_id': transaction.recipient_id,
+                    'amount': transaction.amount,
+                    'currency': transaction.currency,
+                    'state': transaction.state,
+                    }
+                    
+                response["transactions"].append(transactionDict)
+            return make_response(jsonify(response), status_code)
+        else:
+            return make_response('Get transactions failed.', status_code)
+
 @app.route("/updateUser", methods=['POST'])
 def update():
     data = request.get_json()
@@ -111,6 +140,16 @@ def transfer_from_card_to_account():
         else:
             return make_response('Money not transfered', status_code)
 
+
+@app.route("/swapCrypto", methods=['POST'])
+def swap_crypto():
+    if(request.method == 'POST'):
+        data = request.get_json()
+        status_code = swap_currencies(db, data)
+        if status_code != 200:
+            return make_response('Currencies not swapped', status_code)
+        else:
+            return make_response('Success', status_code)
 
 @app.route("/buyCrypto", methods=['POST'])
 def buy_crypto():

@@ -16,7 +16,10 @@ function register(){
                 console.info(response);       
                 alert("Successfully registered!")
                 window.location.href="/login" 
-            }
+            },
+            error: function (ajaxContext) {
+                alert(ajaxContext.responseText)
+            }     
         });
     }catch(e){
         console.error(e)

@@ -28,21 +28,21 @@ def buy_crypto_with_dollar(db, data):
     status_code = 200
     print(data, flush=True)
 
-    money = int(data['data']['money'])
+    money = float(data['data']['money'])
     rate = float(data['data']['rate'])
 
     if money is None or rate is None:
         return 400
 
     real_value = money / rate
-    real_value = round(real_value, 5)
+    real_value = real_value
     if real_value is None:
         return 401
 
     try:
         response = subtract_from_account(db, data['id'], money, '$')
         if(response != 200):
-            return 401
+            return 500
             
         account = db.session.query(Account).filter_by(user_id=data['id'], currency=data['data']['symbol']).first()
 
@@ -58,7 +58,7 @@ def buy_crypto_with_dollar(db, data):
             return 200
 
     except:
-        return 401
+        return 500
 
 
 def subtract_from_account(db, user_id, value, currency):
@@ -96,3 +96,36 @@ def get_user_currencies(db, data):
     except:
         return 401
 
+def swap_currencies(db, data):
+    status_code = 200
+    print(data, flush=True)
+
+    money = float(data['data']['money'])
+    rate = float(data['data']['rate'])
+
+    if money is None or rate is None:
+        return 400
+
+    to_value = money * rate
+    to_value = to_value
+    print(to_value)
+    if to_value is None:
+        return 500
+
+    try:
+        response = subtract_from_account(db, data['id'], money, data['data']['fromSymbol'])
+        if(response != 200):
+            return 500
+            
+        account = db.session.query(Account).filter_by(user_id=data['id'], currency=data['data']['toSymbol']).first()
+
+        if not account:
+            return 500
+
+        else:
+            account.balance += to_value
+            db.session.commit()
+            return 200
+
+    except:
+        return 500

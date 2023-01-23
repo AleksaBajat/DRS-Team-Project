@@ -1,5 +1,5 @@
-from models import Account, Transaction
-from schemas import AccountSchema
+from models import Account, Transaction,User
+from schemas import AccountSchema,TransactionSchema
 from sqlalchemy import distinct
 from user_operations import get_user, get_user_by_email
 from multiprocessing import Process
@@ -38,7 +38,9 @@ def finish_transaction(db, transaction_id, amount, sender_id, recipient_id):
         time.sleep(20)
         state = 'Denied'
         transaction = db.session.query(Transaction).filter_by(id=transaction_id).first()    
-        
+
+        status_sender,sender = get_user(db, {"id":transaction.sender_id})
+        status_recipient,recipient = get_user(db, {"id":transaction.recipient_id})
 
         sender_account = db.session.query(Account).filter_by(user_id=sender_id, currency=transaction.currency).first()
 
@@ -76,7 +78,7 @@ def create_transaction(db, data):
     
     transaction_id = hash_function(sender['email'], recipient['email'], amount)
 
-    transaction = Transaction(id=transaction_id,sender=sender['id'],recipient=recipient['id'], amount=amount, currency=data['currency'])
+    transaction = Transaction(id=transaction_id,sender_id=sender['id'],recipient_id=recipient['id'], amount=amount, currency=data['currency'])
     db.session.add(transaction)
     db.session.commit()
 
@@ -84,3 +86,19 @@ def create_transaction(db, data):
     process.start()
 
     return 200, "Transaction started!"
+
+def get_user_transactions(db, data):
+    if data == None:
+        return 404, None
+    try:
+        transactions = db.session.query(Transaction).where((Transaction.sender_id==data['id'])|(Transaction.recipient_id==data['id'])).all()
+
+        exists = transactions is not None
+        if exists:
+            return 200, transactions
+        else:
+            return 404, None
+
+    except Exception as e:
+        print(e,flush=True)
+        return 401,None
