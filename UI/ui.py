@@ -38,6 +38,25 @@ def index():
 def check():
     return "200 - OK - UI is up!"
 
+@app.route('/swapCurrencies', methods=['GET', 'POST'])
+def swap_currencies():
+    id = session.get('user_id')
+
+    if request.method == 'POST':
+        data = request.form
+        print(data, flush=True)
+
+        url = "http://engine:8081/swapCrypto"
+        values = {
+            'id' : id,
+            'data' : data
+        }
+        response = requests.post(url, json=values)
+        if response.status_code != 200:
+            return make_response("Currencies not swapped", response.status_code)
+        else:
+            return render_template('index.html')
+
 @app.route('/swap', methods=['GET', 'POST'])
 def swap_crypto():
     if request.method == 'POST':
@@ -72,6 +91,7 @@ def buy_crypto():
     elif request.method == 'POST':
         data = request.form
         print(data, flush=True)
+        print('-------------------------------------------', flush=True)
 
         url = "http://engine:8081/buyCrypto"
         values = {

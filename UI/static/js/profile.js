@@ -34,6 +34,12 @@ $(document).ready(function() {
 
     $('.crypto-popup-wrapper').click(function (e) {
         $('.show-div').hide()
+        $('.from-select').empty()
+        $('.to-select').empty()
+        $('#fromValue').text(1)
+        $('#toValue').text(1)
+        $('#fromSymbol').text('$')
+        $('#toSymbol').text('$')
     })
 
     $('.crypto-popup').click(function (e) {
@@ -66,7 +72,7 @@ $(document).ready(function() {
 
         $('#fromValue').text(main)
         $('#toValue').text(1)
-        $('#fromSymbol').text(valueSelected)        
+        $('#fromSymbol').text(valueSelected)
     });
 
     $('.to-select').on('change', function (e) {
@@ -91,6 +97,9 @@ $(document).ready(function() {
         if(value1 == 0) value1 = 1
         if(value2 == 0) value2 = 1
 
+        let rate = value1/value2
+        $('#rate').val(rate)
+
         main = Math.round((value2/value1) * 10000000) / 10000000
 
         $('#fromValue').text(main)
@@ -100,7 +109,7 @@ $(document).ready(function() {
 
     $('#moneyDollar').on('input', function () {
         let value = $(this).val()
-        if(value != undefined && value != 0){
+        if(value != undefined && value > 0){
             let data = JSON.parse(localStorage['filteredData'])
 
             from = localStorage['fromSymbol']
@@ -121,6 +130,9 @@ $(document).ready(function() {
 
             if(value1 == 0) value1 = 1
             if(value2 == 0) value2 = 1
+
+            let rate = value1/value2
+            $('#rate').val(rate)
 
             let main = (value1/value2) * value
             main = Math.round(main * 10000000) / 10000000
@@ -157,4 +169,41 @@ function openPopup(data){
     $('#fromSymbol').text('$')
     $('#toSymbol').text('$')
     
+}
+
+function submitCrypto(){
+    try{
+        var form = document.getElementById('buy-form');
+        var formData = new FormData(form);
+        
+        money = $('#moneyDollar').val()
+        if(money <= 0){
+            alert('Number must be greater than 0')
+            e.stopPropagation()
+            return;
+        }
+
+        $.ajax({
+            type: "POST",        
+            url: "/swapCurrencies",
+            data: formData,        
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $('.from-select').empty()
+                $('.to-select').empty()
+                $('#fromValue').text(1)
+                $('#toValue').text(1)
+                $('#fromSymbol').text('$')
+                $('#toSymbol').text('$')
+                window.location.href="/index" 
+            },
+            error: function (ajaxContext) {
+                alert(ajaxContext.responseText)
+            }      
+        });
+
+    }catch(e){
+        console.log(e)
+    }
 }

@@ -34,7 +34,7 @@
           {% for currency in currencies %}
             <tr class="crypto_row">
                 <td id="currency">{{ currency.currency }}</td>
-                <td>{{ currency.balance }}</td>
+                <td>{{ currency.balance |round(5)}}</td>
             </tr>
           {% endfor %}
         </tbody>
@@ -58,23 +58,22 @@
       <div class="crypto-popup">
           <div class="values-wrapper">
             <h2>Transfer</h2>
-            <span>From: </span>
-            <select class="from-select">
-            </select>
-            <span> To: </span>
-            <select class="to-select">
-            </select>
-          </div>
-          <div class="price">
-              <span id="fromValue"></span>
-              <span id="fromSymbol"></span>
-              <span> = </span>
-              <span id="toValue">1</span>
-              <span id="toSymbol"></span>
-          </div>
-          
-          <form id="buy-form">
-              <input type="hidden" name="symbol" id="symbol">
+            <form id="buy-form">
+                <span>From: </span>
+                <select name="fromSymbol" class="from-select">
+                </select>
+                <span> To: </span>
+                <select name="toSymbol" class="to-select">
+                </select>
+              </div>
+              <div class="price">
+                  <span id="fromValue"></span>
+                  <span id="fromSymbol"></span>
+                  <span> = </span>
+                  <span id="toValue">1</span>
+                  <span id="toSymbol"></span>
+              </div>
+            
               <input type="hidden" name="rate" id="rate">
               <input type="number" name="money" id="moneyDollar" value="0">
               <div class="buy-btn" onclick="submitCrypto()">
