@@ -1,5 +1,6 @@
 from flask import Flask, render_template,url_for,request, make_response, session, redirect
 from flask_session import Session
+from waitress import serve
 import requests
 import json
 import os
@@ -314,4 +315,4 @@ def transaction():
             
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8081)
+    serve(app, host="0.0.0.0", port=8081)
