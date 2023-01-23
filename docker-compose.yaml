@@ -9,6 +9,8 @@ services:
     volumes:
       - ./UI/templates:/app/templates
       - ./UI/static:/app/static
+    environment:
+      - ENGINE_URL=http://engine:8081
   engine:
     build: 
       context: ./Engine

@@ -5,6 +5,7 @@ from models import db
 from user_operations import add_user, login_user, get_user, update_user, verify_user
 from transaction_operations import transaction_ui, create_transaction,get_user_transactions
 from account_operations import get_user_currencies
+from waitress import serve
 import os
 
 app = Flask(__name__)
@@ -164,4 +165,4 @@ def buy_crypto():
 
 
 if __name__ == '__main__':    
-    app.run(debug=True)    
+    serve(app, host="0.0.0.0", port=8081, threads=4)     

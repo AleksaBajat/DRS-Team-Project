@@ -20,4 +20,4 @@ COPY instance /app/instance
 
 RUN pip install -r requirements.txt
 
-CMD ["flask","--app","engine","--debug","run","--host=0.0.0.0","--port","8081"]
+CMD ["python", "engine.py"]
