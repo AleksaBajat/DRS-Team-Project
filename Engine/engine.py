@@ -104,7 +104,7 @@ def update():
 def transaction_ui_data():
     data = request.get_json()    
 
-    status_code, ui_data = transaction_ui(db, data['id'])
+    status_code, ui_data = transaction_ui(app ,db, data['id'])
 
     if status_code == 200:
         return make_response(jsonify(ui_data), status_code)

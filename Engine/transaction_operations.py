@@ -2,6 +2,7 @@ from models import Account, Transaction,User
 from schemas import AccountSchema,TransactionSchema
 from sqlalchemy import distinct
 from user_operations import get_user, get_user_by_email
+from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import Process
 from Crypto.Hash import keccak
 import time
@@ -10,19 +11,29 @@ import random
 
 account_schema = AccountSchema()
 
-def transaction_ui(db, id):
-    accounts = db.session.query(Account).filter(Account.user_id==id).all()
-    currencies = db.session.query(distinct(Account.currency)).filter(Account.user_id==id).all()
 
-    
-    ui_data = {        
-        "accounts": [account_schema.dump(account) for account in accounts],
-        "currencies": [c[0] for c in currencies]
-    }
+def get_accounts(app, db, id):
+    with app.app_context():
+        return db.session.query(Account).filter(Account.user_id==id).all()
 
-    print(ui_data, flush=True)
+def get_currencies(app, db, id):
+     with app.app_context():
+        return db.session.query(distinct(Account.currency)).filter(Account.user_id==id).all()
 
-    return 200,ui_data
+def transaction_ui(app,db, id):
+    with ThreadPoolExecutor() as executor:
+        accounts_future = executor.submit(get_accounts,app, db, id)
+        currencies_future = executor.submit(get_currencies, app, db, id)
+
+        accounts = accounts_future.result()
+        currencies = currencies_future.result()
+
+        ui_data = {        
+            "accounts": [account_schema.dump(account) for account in accounts],
+            "currencies": [c[0] for c in currencies]
+        }
+        return 200, ui_data
+
 
 
 def hash_function(sender, recipient, amount):
